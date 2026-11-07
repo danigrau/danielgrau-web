@@ -3,23 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>El búfalo que solucionaba problemas — Página provisional</title>
+  <meta name="description" content="El búfalo que solucionaba problemas, de Daniel Grau. Catorce relatos entrelazados entre la fábula, la fantasía y la reflexión filosófica.">
+  <title>El búfalo que solucionaba problemas — Daniel Grau</title>
   <style>
-    :root { --paper: #e2d3b8; --ink: #2c2924; --ink-soft: #6d6558; --line: rgba(44,41,36,.18); }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Georgia, "Times New Roman", serif; color: var(--ink); background: var(--paper); }
-    main { max-width: 54rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem) 5rem; }
-    h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 500; margin: 0 0 1rem; }
-    p { font-size: 1.1rem; line-height: 1.75; color: var(--ink-soft); max-width: 42rem; }
-    a { color: var(--ink); }
-    .back { display: inline-block; margin-bottom: 2rem; text-decoration: none; border-bottom: 1px solid rgba(44,41,36,.28); }
+    :root { --paper:#e2d3b8; --ink:#2c2924; --ink-soft:#625b50; --line:rgba(44,41,36,.18); }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Georgia,"Times New Roman",serif; }
+    main { width:min(100%,58rem); margin:0 auto; padding:clamp(2rem,6vw,4.5rem) clamp(1.25rem,4vw,2rem) 5rem; }
+    a { color:inherit; }
+    .back { display:inline-block; margin-bottom:2.2rem; text-decoration:none; border-bottom:1px solid rgba(44,41,36,.3); padding-bottom:.2rem; }
+    h1 { font-size:clamp(1.85rem,3.2vw,2.75rem); font-weight:400; line-height:1.18; letter-spacing:-.025em; text-align:center; max-width:17em; margin:0 auto 2.3rem; text-wrap:balance; }
+    .cover { width:min(100%,18.5rem); min-height:17rem; margin:0 auto 1.7rem; display:flex; justify-content:center; align-items:center; }
+    .cover img { display:block; width:100%; height:auto; box-shadow:0 14px 35px rgba(27,24,19,.18); }
+    .cover-placeholder { font-size:.95rem; text-align:center; color:var(--ink-soft); }
+    .action { text-align:center; margin-bottom:3rem; }
+    .amazon { display:inline-block; padding:.8rem 1.6rem; border:1px solid var(--ink); border-radius:3px; background:var(--ink); color:var(--paper); text-decoration:none; font-family:Georgia,"Times New Roman",serif; font-size:1.06rem; }
+    .amazon[aria-disabled="true"] { opacity:.68; cursor:default; }
+    .availability { display:block; font-size:.87rem; color:var(--ink-soft); margin-top:.75rem; }
+    .description { max-width:42rem; margin:0 auto; border-top:1px solid var(--line); padding-top:2rem; }
+    .description p { margin:0 0 1.35rem; color:var(--ink-soft); font-size:clamp(1.03rem,2vw,1.12rem); line-height:1.77; }
+    .description em { color:var(--ink); }
+    @media(max-width:600px) { .back { margin-bottom:1.8rem; } h1 { margin-bottom:2rem; } .cover { width:min(67vw,16rem); min-height:12rem; } .action { margin-bottom:2.4rem; } }
   </style>
 </head>
 <body>
   <main>
     <a class="back" href="index.html#libro">← Volver a la portada</a>
     <h1>El búfalo que solucionaba problemas</h1>
-    <p>Esta es una página provisional para comprobar la navegación desde la home. Más adelante aquí podría ir la página específica del libro, con sinopsis ampliada, detalles y formas de conseguirlo.</p>
+    <figure class="cover" id="cover">
+      <span class="cover-placeholder">Portada de <em>El búfalo que solucionaba problemas</em></span>
+    </figure>
+    <div class="action">
+      <!-- Cuando KDP esté publicado, añadir href="URL_REAL_DE_AMAZON" y retirar aria-disabled. -->
+      <a class="amazon" aria-disabled="true">Comprar en Amazon</a>
+      <span class="availability">Disponible próximamente</span>
+    </div>
+    <section class="description" aria-label="Sobre el libro">
+      <p>Una feria de curiosidades llega al pueblo de un joven aprendiz de panadero. Movido por la curiosidad, recorre sus carpas y conoce a un búfalo. Desde entonces vuelve cada día: cada encuentro abre la puerta a una historia y a una manera distinta de contemplar aquello que creía conocer.</p>
+      <p><em>El búfalo que solucionaba problemas</em> compone un ciclo de catorce relatos entrelazados donde lo cotidiano se desplaza hacia lo simbólico y lo maravilloso. Con una voz serena, ternura, ironía amable y humor sutil, sus cuentos exploran la identidad, el miedo, los vínculos, la percepción, el conocimiento, la imaginación y el deseo de controlar la vida.</p>
+      <p>Entre la fábula contemporánea para adultos, el cuento fantástico y la reflexión filosófica, el libro no ofrece respuestas cerradas ni moralejas impuestas. Invita a detenerse ante las preguntas, observarlas desde otro ángulo y conservar intacta una parte de su misterio.</p>
+    </section>
   </main>
+  <script>
+    // Reutiliza la portada que ya contiene la página principal.
+    // Cuando exista un archivo de imagen autónomo, sustituir por un <img src="...">.
+    (async function () {
+      try {
+        const response = await fetch('index.html');
+        if (!response.ok) throw new Error('No se pudo leer la portada');
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html,'text/html');
+        const existing = doc.querySelector('.book-cover img');
+        if (!existing || !existing.getAttribute('src')) return;
+        const img = document.createElement('img');
+        img.src = existing.getAttribute('src');
+        img.alt = 'Portada de El búfalo que solucionaba problemas';
+        img.decoding = 'async';
+        img.onload = function () { document.getElementById('cover').replaceChildren(img); };
+      } catch (error) { console.warn('No se ha podido cargar la portada', error); }
+    })();
+  </script>
 </body>
 </html>
