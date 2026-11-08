@@ -1,0 +1,4 @@
+:root { --paper:#e2d3b8; --ink:#2c2924; }
+body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia, "Times New Roman", serif; }
+main { max-width:42rem; margin:6rem auto; padding:0 1.5rem; text-align:center; }
+a { color:inherit; }
